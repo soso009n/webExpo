@@ -1,0 +1,235 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --surface: 0 0% 100%;
+    --surface-2: 210 30% 94%;
+    --border: 214 25% 86%;
+    --text-primary: 222 47% 11%;
+    --text-secondary: 215 16% 42%;
+    --accent-blue: 211 90% 45%;
+    --accent-green: 142 70% 34%;
+    --accent-red: 0 72% 48%;
+    --accent-yellow: 42 80% 38%;
+    --accent-orange: 35 80% 42%;
+    --accent-purple: 265 70% 55%;
+  }
+
+  .dark {
+    --background: 222 26% 7%;
+    --surface: 215 28% 11%;
+    --surface-2: 215 22% 16%;
+    --border: 215 16% 24%;
+    --text-primary: 210 40% 96%;
+    --text-secondary: 215 12% 62%;
+    --accent-blue: 212 100% 68%;
+    --accent-green: 132 51% 49%;
+    --accent-red: 3 90% 64%;
+    --accent-yellow: 39 71% 49%;
+    --accent-orange: 42 75% 57%;
+    --accent-purple: 267 100% 77%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body {
+    @apply bg-background text-text-primary;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-width: 320px;
+    background-image: radial-gradient(circle at 90% -10%, hsl(var(--accent-blue) / 0.08), transparent 28rem), radial-gradient(circle at 0% 100%, hsl(var(--accent-purple) / 0.04), transparent 24rem);
+    overscroll-behavior: none;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--text-secondary));
+  }
+
+  ::selection {
+    background: hsl(var(--accent-blue) / 0.25);
+  }
+
+  /* Focus visible untuk aksesibilitas */
+  :focus-visible {
+    outline: 2px solid #58a6ff;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .leaflet-container {
+    height: 100%;
+    width: 100%;
+    min-height: 0;
+    z-index: 0;
+    font-family: inherit;
+  }
+
+  .scada-card {
+    @apply rounded-card border border-border bg-surface p-4 shadow-sm transition-[border-color,box-shadow,transform] duration-150;
+  }
+  .scada-card:hover {
+    @apply border-border shadow-md;
+  }
+
+  .scada-card-interactive:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px hsl(var(--text-primary) / 0.08);
+  }
+
+  .dashboard-shell {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.16) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.16) 1px, transparent 1px),
+      radial-gradient(circle at 75% 0%, hsl(var(--accent-blue) / 0.10), transparent 26rem);
+    background-size: 32px 32px, 32px 32px, auto;
+    background-position: center top;
+  }
+
+  .dashboard-hero {
+    @apply relative overflow-hidden rounded-card border border-accent-blue/20 bg-gradient-to-br from-accent-blue/10 via-surface to-surface p-4 shadow-sm;
+  }
+  .dashboard-hero::after {
+    content: '';
+    position: absolute;
+    right: -4rem;
+    top: -5rem;
+    width: 16rem;
+    height: 16rem;
+    border: 1px solid hsl(var(--accent-blue) / 0.16);
+    border-radius: 9999px;
+    box-shadow: 0 0 0 2rem hsl(var(--accent-blue) / 0.03), 0 0 0 4rem hsl(var(--accent-blue) / 0.02);
+    pointer-events: none;
+  }
+
+  .status-strip {
+    @apply flex flex-wrap items-center gap-x-4 gap-y-2 rounded-card border border-border bg-surface/80 px-3 py-2 text-[10px] text-text-secondary shadow-sm backdrop-blur-sm;
+  }
+
+  .chart-card {
+    @apply min-w-0 rounded-card border border-border bg-surface p-4 shadow-sm;
+  }
+
+  .kpi-card {
+    @apply relative overflow-hidden;
+  }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: hsl(var(--accent-blue));
+    opacity: 0.8;
+  }
+
+  .mobile-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .mobile-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scada-button-secondary {
+    @apply inline-flex min-h-8 items-center justify-center gap-1.5 rounded-input border border-border bg-surface px-3 py-1.5 text-xs font-medium text-text-secondary shadow-sm transition-[border-color,background-color,color,box-shadow] hover:border-accent-blue hover:bg-accent-blue/5 hover:text-accent-blue focus-visible:ring-2 focus-visible:ring-accent-blue/40 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Input field standar untuk form SCADA */
+  .scada-input {
+    @apply w-full bg-surface-2 border border-border rounded-input px-3 py-1.5 text-sm text-text-primary
+           placeholder:text-text-secondary shadow-sm focus:outline-none focus:border-accent-blue focus:ring-2 focus:ring-accent-blue/15
+           transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .app-surface {
+    background-image: linear-gradient(180deg, hsl(var(--surface) / 0.35), transparent 18rem);
+  }
+
+  .sidebar-surface {
+    background-image: linear-gradient(180deg, hsl(var(--surface) / 0.98), hsl(var(--surface) / 0.92));
+  }
+
+  .page-fade-in {
+    animation: fade-in 180ms ease-out;
+  }
+
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@media (max-width: 639px) {
+  button, a, select, input, textarea {
+    touch-action: manipulation;
+  }
+
+  .scada-card:hover {
+    transform: none;
+  }
+
+  .scada-card-interactive:hover {
+    box-shadow: inherit;
+  }
+
+  .dashboard-shell {
+    background-size: 24px 24px, 24px 24px, auto;
+  }
+
+  .scada-button-secondary {
+    min-height: 2.5rem;
+    padding-inline: 0.75rem;
+  }
+
+  .scada-input {
+    min-height: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Skeleton shimmer loading */
+  .skeleton {
+  background: linear-gradient(90deg, hsl(var(--surface-2)) 25%, hsl(var(--border)) 50%, hsl(var(--surface-2)) 75%);
+  background-size: 1000px 100%;
+  @apply animate-shimmer rounded-card;
+}

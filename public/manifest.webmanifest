@@ -1,0 +1,22 @@
+{
+  "name": "River Flow Guardian SCADA",
+  "short_name": "RFG SCADA",
+  "description": "Monitoring dan kendali aman stasiun sungai River Flow Guardian.",
+  "lang": "id-ID",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#0b1220",
+  "background_color": "#0b1220",
+  "categories": ["business", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
